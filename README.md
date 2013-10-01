@@ -45,12 +45,8 @@ Think Can International Bookings
 	
 	> This is typically at C:/RailsInstaller/Ruby1.9.3/bin
 
-3. Initialize the database with the following commands:
+3. Start the server using `$ rails server`
 	
-	`$ rake db:create`
-	 
-	`$ rake db:migrate RAILS_ENV=production`
+	The server should be running at (http://localhost:3000)
 	
-4. Start the server using `$ rails server`
-	
-	The server should be running at (http://localhost:3000) 
+4. If required, perform migrations on dev database using: `$ rake db:migrate RAILS_ENV=development` 
