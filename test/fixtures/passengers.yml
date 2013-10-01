@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  passport_no: MyString
+  nationality: MyString
+  address: MyString
+  country: MyString
+  name: MyString
+  dob: 2013-10-02 02:00:17
+
+two:
+  passport_no: MyString
+  nationality: MyString
+  address: MyString
+  country: MyString
+  name: MyString
+  dob: 2013-10-02 02:00:17

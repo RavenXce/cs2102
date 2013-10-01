@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reference_id: 1
+  destination: MyString
+  origin: MyString
+  is_too_way: false
+
+two:
+  reference_id: 1
+  destination: MyString
+  origin: MyString
+  is_too_way: false

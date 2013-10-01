@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  flight_id: 1
+  flight_number: MyString
+  airline: MyString
+  departure_time: 2013-10-02 01:56:04
+  arrival_time: 2013-10-02 01:56:04
+  departure_location: MyString
+  arrival_location: MyString
+  departure_gate: MyString
+  arrival_gate: MyString
+  departure_terminal: MyString
+  arrival_terminal: MyString
+
+two:
+  flight_id: 1
+  flight_number: MyString
+  airline: MyString
+  departure_time: 2013-10-02 01:56:04
+  arrival_time: 2013-10-02 01:56:04
+  departure_location: MyString
+  arrival_location: MyString
+  departure_gate: MyString
+  arrival_gate: MyString
+  departure_terminal: MyString
+  arrival_terminal: MyString

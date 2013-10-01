@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ticket_no: 1
+  booking_id: 1
+  seat_number: MyString
+  flight_id: 1
+  passenger_id: MyString
+  passenger_nationality: MyString
+
+two:
+  ticket_no: 1
+  booking_id: 1
+  seat_number: MyString
+  flight_id: 1
+  passenger_id: MyString
+  passenger_nationality: MyString

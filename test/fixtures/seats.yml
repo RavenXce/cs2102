@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  flight_id: 1
+  seat_number: MyString
+  seat_type: MyString
+  price: 9.99
+
+two:
+  flight_id: 1
+  seat_number: MyString
+  seat_type: MyString
+  price: 9.99
