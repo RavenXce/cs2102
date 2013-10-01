@@ -1,4 +1,6 @@
-cs2102
+CS2102 Project
 ======
 
-CS2102 DB Project
+Think Can Int'l Bookings
+
+#Installation
