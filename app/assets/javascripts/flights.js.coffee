@@ -4,9 +4,16 @@
 $(document).on('ready page:change',()->
   $('.datepicker').datepicker()
   $('#fromDate').datepicker('setValue', Date.now())
+  $('#toDate').datepicker('setValue', Date.now())
+  
   $('.touchspin').TouchSpin(
     min: 0
     prefix: ' '
   )
   $('.bootstrap-touchspin-prefix').addClass('glyphicon glyphicon-user')
+  
+  $('.btn-group .btn').on('click', ()->
+    $(this).siblings().toggleClass('active')
+    $(this).toggleClass('active')
+  );
 )

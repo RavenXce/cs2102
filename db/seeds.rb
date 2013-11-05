@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+airportsPath = "#{Rails.root}/db/airports.json"
+airports = JSON.parse(File.read(airportsPath))
+airports.each_pair do |iata_code, airport|
+  parsed = airport.slice(:name, :city, :country, :country_code)
+  parsed[:iata_code] = iata_code
+  Airport.create!(parsed)
+end

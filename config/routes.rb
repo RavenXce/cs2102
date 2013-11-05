@@ -1,5 +1,6 @@
 Cs2102::Application.routes.draw do
   root to: 'welcome#index', as: :default
+  post 'flights' => 'flights#search', as: :search_flights
   resources :flights, :bookings
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

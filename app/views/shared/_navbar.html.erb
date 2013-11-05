@@ -14,13 +14,13 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active">
-					<a href="#">Latest Deals</a>
+				<li<%=active_if_controller 'welcome'%>>
+					<a href="<%=default_path%>">Latest Deals</a>
 				</li>
-				<li>
-					<a href="flights">Book Flight</a>
+				<li<%=active_if_controller 'flights'%>>
+					<a href="<%=flights_path%>">Book Flight</a>
 				</li>
-				<li>
+				<li<%=active_if_controller 'explore'%>>
 					<a href="#">Explore</a>
 				</li>
 			</ul>
