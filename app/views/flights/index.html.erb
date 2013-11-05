@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row row-padded">
 		<div class="btn-group">
-			<button type="button" class="btn btn-default active">
+			<button type="button" id="twoWayBtn" class="btn btn-default active">
 				Round-trip
 			</button>
 			<button type="button" class="btn btn-default">
@@ -15,6 +15,7 @@
 	<div class="row row-padded">
 		<form class="form-inline" role="form" method="post" action="<%= search_flights_path%>">
 			<%= token_tag %>
+			<input type="hidden" name="two_way" id="twoWay">
 			<div class="form-group">
 				<label class="sr-only" for="fromAirport">From Airport</label>
 				<div class="input-group">
