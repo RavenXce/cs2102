@@ -1,0 +1,16 @@
+{
+	"carousel": [
+					{
+						"src": "maldives-1.jpg",
+					    "alt": "alt text",
+					    "text": "Book Now!",
+					    "caption": "Visit the amazing Maldives for the lowest price in town!"
+					},
+					{
+						"src": "maldives-1.jpg",
+					    "alt": "alt text",
+					    "text": "Book Now!",
+					    "caption": "Visit the amazing Maldives for a low price of $100"
+					}
+				]
+}

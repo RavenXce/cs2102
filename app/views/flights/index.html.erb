@@ -1,0 +1,49 @@
+<div class="row row-padded">
+	<div class="btn-group">
+		<button type="button" class="btn btn-default active">
+			Round-trip
+		</button>
+		<button type="button" class="btn btn-default">
+			One-way
+		</button>
+	</div>
+</div>
+<div class="row row-padded">
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<label class="sr-only" for="fromAirport">From Airport</label>
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-plane"></span>
+				<input type="text" class="form-control" id="fromAirport" placeholder="From Airport">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="sr-only" for="toAirport">To Airport</label>
+			<input type="text" class="form-control" id="toAirport" placeholder="To Airport">
+		</div>
+		<div class="form-group">
+			<div class="magic-padding mp2"></div>
+		</div>
+		<div class="form-group">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+				<input class="form-control datepicker" id="fromDate" type="text" data-date-format="dd-mm-yyyy">
+			</div>
+		</div>
+		<div class="form-group">
+			<input class="form-control datepicker" id="toDate" type="text" data-date-format="dd-mm-yyyy">
+		</div>
+		<div class="form-group">
+			<div class="magic-padding mp2"></div>
+		</div>
+		<div class="form-group">
+			<input class="form-control touchspin" id="pax" type="text">
+		</div>
+		<div class="form-group">
+			<div class="magic-padding mp1"></div>
+		</div>
+		<button type="submit" class="btn btn-default">
+			Go!
+		</button>
+	</form>
+</div>

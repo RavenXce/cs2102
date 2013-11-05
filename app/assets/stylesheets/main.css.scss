@@ -1,0 +1,26 @@
+// Main Stylesheet
+$font-family-sans-serif: 'Raleway', sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,300);
+@import "bootstrap";
+
+body {
+  padding-top: 70px;
+}
+.row-padded {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.magic-padding {
+  &.mp1 {
+    padding-right: 5px;
+  }
+  &.mp2 {
+    padding-right: 10px;
+  }
+  &.mp3 {
+    padding-right: 15px;
+  }
+}
+.glyphicon {
+  top: 0px;
+}

@@ -1,0 +1,37 @@
+/* date & time picker */
+.datepicker td,
+.datepicker th{
+  border-radius: 0 !important;
+  font-size: 13px;
+}
+.datepicker td.active,
+.datepicker td.active:hover, {
+  background: #2283c5 !important;
+}
+.datepicker td.active.disabled,
+.datepicker td.active.disabled:hover, {
+  background: #8b9aa3 !important;
+}
+.datepicker td,
+.datepicker th {
+  min-width: 32px;
+}
+.datepicker-months .month,
+.datepicker-years .year {
+  border-radius: 0 !important;
+}
+.datepicker-months .month.active,
+.datepicker-years .year.active,
+.datepicker-months .month.active:hover,
+.datepicker-years .year.active:hover,
+.datepicker-months .month.active:focus,
+.datepicker-years .year.active:focus,
+.datepicker-months .month.active:active,
+.datepicker-years .year.active:active {
+  background-image: none !important;
+  background-color: #2283c5 !important;
+}
+.well .datepicker table tr td.day:hover {
+  background-color: #7d8893;
+  color: #FFF;
+}
