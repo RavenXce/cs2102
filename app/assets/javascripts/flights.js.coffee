@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('ready page:change', () ->
   $('.datepicker').datepicker()
-  $('#fromDate').datepicker('setValue', Date.now())
-  $('#toDate').datepicker('setValue', Date.now())
-  
+  $('.datepicker').datepicker('setValue', Date.now())  
+  $('.chosen-select').chosen(
+    width: "178px"
+  )  
   $('.touchspin').TouchSpin(
     min: 1
     prefix: ' '
@@ -19,9 +20,15 @@ $(document).on('ready page:change', () ->
     updateTwoWayStatus()
   );
   
-  $('.chosen-select').chosen(
-    width: "178px"
-  )
+  $('#book-btn').on('click', () ->
+    $('<form action="bookings" method="GET">' + 
+    '<input type="hidden" name="destination" value="' + imgnum + '">' +
+    '<input type="hidden" name="origin" value="' + imgnum + '">' +
+    '<input type="hidden" name="is_two_way" value="' + imgnum + '">' +
+    '<input type="hidden" name="flight_ids" value="' + imgnum + '">' +
+    #pax? passengers? users?
+    '</form>').submit();
+  );
 )
 
 updateTwoWayStatus = () ->

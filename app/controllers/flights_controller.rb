@@ -8,9 +8,7 @@ class FlightsController < ApplicationController
     @two_way = @two_way == "true"
     @origin = params[:from_airport]
     @destination = params[:to_airport]
-    #airport_here = Airport.where("name like ? or country like ? or city like ? or country_code like ? or iata_code like ?", "%#{params[:fromAirport]}%")
-    #airport_there = Airport.where("name like ? or country like ? or city like ? or country_code like ? or iata_code like ?", "%#{params[:toAirport]}%")
-    #TODO: ajoining flights
+    #TODO: ajoining flights!!
     flights_there = Flight.where(:departure_location => @origin, :arrival_location => @destination)
     flights_there = flights_there.where('departure_time >= :start and departure_time <= :end', :start => params[:from_date].to_date, :end => params[:from_date].to_date + 1.day)
     if !@two_way
