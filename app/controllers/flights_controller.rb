@@ -10,10 +10,10 @@ class FlightsController < ApplicationController
     #airport_here = Airport.where("name like ? or country like ? or city like ? or country_code like ? or iata_code like ?", "%#{params[:fromAirport]}%")
     #airport_there = Airport.where("name like ? or country like ? or city like ? or country_code like ? or iata_code like ?", "%#{params[:toAirport]}%")
     #TODO: ajoining flights
-    flights_there = Flight.where(:departure_location => params[:from_airport],
-     :arrival_location => params[:to_airport], :departure_time => params[:from_date].to_date)
-    flights_back = Flight.where(:departure_location => params[:to_airport],
-     :arrival_location => params[:from_airport], :departure_time => params[:to_date].to_date)
+    flights_there = Flight.where(:departure_location => params[:from_airport], :arrival_location => params[:to_airport])
+    flights_there = flights_there.where('departure_time >= :start and departure_time <= :end', :start => params[:from_date].to_date, :end => params[:from_date].to_date + 1.day)
+    flights_back = Flight.where(:departure_location => params[:to_airport], :arrival_location => params[:from_airport])
+    flights_back = flights_back.where('departure_time >= :start and departure_time <= :end', :start => params[:to_date].to_date, :end => params[:to_date].to_date + 1.day)
     puts flights_there.to_sql
     puts flights_back.to_sql
     flights_there.each do |ft|
