@@ -11,4 +11,6 @@
  *= require datepicker
  *= require_self
  *= require_tree .
+ *= require chosen
+ *= require chosen-bootstrap
  */

@@ -1,0 +1,7 @@
+<%
+airportsPath = "#{Rails.root}/db/airports.json"
+airports = JSON.parse(File.read(airportsPath))
+	airports.each_pair do |iata_code, airport|
+%>
+<option value="<%=iata_code%>"><%=airport["name"]%> (<%=iata_code%>), <%=airport["country"]%></option>
+<% end %>

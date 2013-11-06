@@ -18,6 +18,10 @@ $(document).on('ready page:change', () ->
     $(this).toggleClass('active')
     updateTwoWayStatus()
   );
+  
+  $('.chosen-select').chosen(
+    width: "178px"
+  )
 )
 
 updateTwoWayStatus = () ->

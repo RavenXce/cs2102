@@ -16,4 +16,6 @@
 //= require bootstrap
 //= require bootstrap-datepicker.min
 //= require bootstrap-touchspin
+//= require chosen.jquery.min
+//= require chosen.ajaxaddition.jquery
 //= require_tree .

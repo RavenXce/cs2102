@@ -20,12 +20,17 @@
 				<label class="sr-only" for="fromAirport">From Airport</label>
 				<div class="input-group">
 					<span class="input-group-addon glyphicon glyphicon-plane"></span>
-					<input type="text" class="form-control" name="from_airport" id="fromAirport" placeholder="From Airport">
+					<select class="chosen-select form-control" name="from_airport" id="fromAirport">
+						<%= render partial: 'airport_list'%>
+					</select>
 				</div>
 			</div>
+			to
 			<div class="form-group">
 				<label class="sr-only" for="toAirport">To Airport</label>
-				<input type="text" class="form-control" name="to_airport" id="toAirport" placeholder="To Airport">
+				<select class="chosen-select form-control" name="to_airport" id="toAirport">
+					<%= render partial: 'airport_list'%>
+				</select>
 			</div>
 			<div class="form-group">
 				<div class="magic-padding mp2"></div>
@@ -60,9 +65,11 @@
 	<blockquote>
 		<h3>Results</h3>
 	</blockquote>
+
 	<div class="container">
 		<div class="row">
-			<table class="table table-hover">
+			<%if !@results.empty?%>
+			<table class="table table-hover" data-origin="<%= @origin%>" data-destination="<%= @destination%>" data-two-way=<%= @two_way%>>
 				<thead>
 					<tr>
 						<th>Price</th>
@@ -76,27 +83,35 @@
 				</thead>
 				<tbody>
 					<% @results.each do |r| %>
-						<tr>
-							<td<%= ' rowspan=2' if @two_way %>><%= number_to_currency r[:total_price], precision: 0%></td>
-							<td<%= ' rowspan=2' if @two_way %> class="airline-col"><%= r[:airlines]%></td>
-							<td><%= r[:away].departure_location%></td>
-							<td><%= r[:away].departure_time.to_formatted_s(:short)%></td>
-							<td><%= r[:away].arrival_location%></td>
-							<td><%= r[:away].arrival_time.to_formatted_s(:short)%></td>
-							<td<%= ' rowspan=2' if @two_way %> class="center">
-							<button type="button" id="book-btn" class="btn btn-success<%=' btn-xs' if !@two_way %>">Book Now!</button></td>
-						</tr>
-						<%if @two_way then%>
-						<tr>
-							<td><%= r[:back].departure_location%></td>
-							<td><%= r[:back].departure_time.to_formatted_s(:short)%></td>
-							<td><%= r[:back].arrival_location%></td>
-							<td><%= r[:back].arrival_time.to_formatted_s(:short)%></td>
-						</tr>
-						<%end%>
+					<tr data-flight-ids="<%= r[:flight_ids]%>">
+						<td<%= ' rowspan=2' if @two_way %>>
+							<%= number_to_currency r[:total_price], precision: 0%></td>
+							<td<%= ' rowspan=2' if @two_way %> class="airline-col">
+								<%= r[:airlines]%></td> <td><%= r[:away].departure_location%></td>
+								<td><%= r[:away].departure_time.to_formatted_s(:short)%></td>
+								<td><%= r[:away].arrival_location%></td>
+								<td><%= r[:away].arrival_time.to_formatted_s(:short)%></td>
+								<td<%= ' rowspan=2' if @two_way %> class="center">
+									<button type="button" id="book-btn" class="btn btn-success<%= ' btn-xs' if !@two_way %>">
+										Book Now!
+									</button></td>
+					</tr>
+					<%if @two_way then%>
+					<tr>
+						<td><%= r[:back].departure_location%></td>
+						<td><%= r[:back].departure_time.to_formatted_s(:short)%></td>
+						<td><%= r[:back].arrival_location%></td>
+						<td><%= r[:back].arrival_time.to_formatted_s(:short)%></td>
+					</tr>
+					<%end%>
 					<%end%>
 				</tbody>
 			</table>
+			<%else%>
+			<p>
+				Sorry, no matching flights found.
+			</p>
+			<%end%>
 		</div>
 	</div>
 </div>
