@@ -36,9 +36,9 @@
 					<input class="form-control datepicker" name="from_date" id="fromDate" type="text" data-date-format="dd-mm-yyyy">
 				</div>
 			</div>
-			to
+			<span class="to-date">to</span>
 			<div class="form-group">
-				<input class="form-control datepicker" name="to_date" id="toDate" type="text" data-date-format="dd-mm-yyyy">
+				<input class="form-control datepicker to-date" name="to_date" id="toDate" type="text" data-date-format="dd-mm-yyyy">
 			</div>
 			<div class="form-group">
 				<div class="magic-padding mp2"></div>
@@ -65,32 +65,33 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<td>Price</td>
-						<td>Airline</td>
-						<td>Depature</td>
-						<td></td>
-						<td>Arrival</td>
-						<td></td>
-						<td></td>
+						<th>Price</th>
+						<th>Airline</th>
+						<th>Departure</th>
+						<th></th>
+						<th>Arrival</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<% @results.each do |r| %>
 						<tr>
-							<td<%= 'rowspan="2"' if @two_way %>><%= r[:total_price]%></td>
-							<td<%= 'rowspan="2"' if @two_way %>><%= r[:airlines]%></td>
+							<td<%= ' rowspan=2' if @two_way %>><%= number_to_currency r[:total_price], precision: 0%></td>
+							<td<%= ' rowspan=2' if @two_way %> class="airline-col"><%= r[:airlines]%></td>
 							<td><%= r[:away].departure_location%></td>
-							<td><%= r[:away].departure_time%></td>
+							<td><%= r[:away].departure_time.to_formatted_s(:short)%></td>
 							<td><%= r[:away].arrival_location%></td>
-							<td><%= r[:away].arrival_time%></td>
-							<td<%= 'rowspan="2"' if @two_way %>>Book Button</td>
+							<td><%= r[:away].arrival_time.to_formatted_s(:short)%></td>
+							<td<%= ' rowspan=2' if @two_way %> class="center">
+							<button type="button" id="book-btn" class="btn btn-success<%=' btn-xs' if !@two_way %>">Book Now!</button></td>
 						</tr>
 						<%if @two_way then%>
 						<tr>
 							<td><%= r[:back].departure_location%></td>
-							<td><%= r[:back].departure_time%></td>
+							<td><%= r[:back].departure_time.to_formatted_s(:short)%></td>
 							<td><%= r[:back].arrival_location%></td>
-							<td><%= r[:back].arrival_time%></td>
+							<td><%= r[:back].arrival_time.to_formatted_s(:short)%></td>
 						</tr>
 						<%end%>
 					<%end%>

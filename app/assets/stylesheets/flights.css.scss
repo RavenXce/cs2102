@@ -7,6 +7,15 @@
 .bootstrap-touchspin {
   width: 225px;
 }
-.search-results{
+.search-results {
   margin-top: 50px;
+}
+.airline-col {
+  width: 350px;
+}
+td[rowspan] {
+  vertical-align: middle !important;
+}
+td.center {  
+  text-align: center;
 }

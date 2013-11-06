@@ -12,12 +12,19 @@ $(document).on('ready page:change', () ->
   )
   $('.bootstrap-touchspin-prefix').addClass('glyphicon glyphicon-user')
   
+  updateTwoWayStatus()
   $('.btn-group .btn').on('click', () ->
     $(this).siblings().toggleClass('active')
     $(this).toggleClass('active')
-    if $('#twoWayBtn').hasClass('active') 
-      $('#two_way').val('true')
-    else
-      $('#two_way').val('false')
+    updateTwoWayStatus()
   );
 )
+
+updateTwoWayStatus = () ->
+  if $('#twoWayBtn').hasClass('active') 
+    $('#twoWay').val('true')
+    $('.to-date').show()
+  else
+    $('#twoWay').val('false')
+    $('.to-date').hide()
+  
