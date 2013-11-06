@@ -1,21 +1,30 @@
 // Place all the styles related to the Flights controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#pax {
-  width: 88px;
-}
-.bootstrap-touchspin {
-  width: 175px;
-}
-.search-results {
-  margin-top: 50px;
-}
-.airline-col {
-  width: 350px;
+
+.form-group, .input-group {  
+  &.airport {
+    width: 275px;
+  }
+  &.date {
+    width: 165px;
+  }
+  &.date-short {
+    width: 135px;
+  }
+  &.pax{
+    width: 140px;
+  }
 }
 td[rowspan] {
   vertical-align: middle !important;
 }
 td.center {  
   text-align: center;
+}
+.search-results {
+  margin-top: 50px;
+}
+.airline-col {
+  width: 350px;
 }

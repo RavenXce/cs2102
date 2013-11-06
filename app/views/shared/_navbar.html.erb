@@ -25,8 +25,9 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav pull-right">
+				<%if user_signed_in?%>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>					
 					<ul class="dropdown-menu">
 						<li>
 							<a href="#">Go to Cart</a>
@@ -43,10 +44,15 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a href="#">Logout</a>
+							<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
 						</li>
 					</ul>
 				</li>
+				<%else%>
+				<li>
+					<a href="<%=new_user_session_path%>">Log In</a>
+				</li>
+				<%end%>
 			</ul>
 		</div>
 	</div>

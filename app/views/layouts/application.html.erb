@@ -8,8 +8,9 @@
 	</head>
 	<body>
 		<%= render partial: "shared/navbar"%>
-		
-		<div class="container">
+		<div class="container">		
+			<div class="notice"><%= notice %></div>
+	        <div class="alert"><%= alert %></div>
 			<%= yield %>
 		</div>
 	</body>

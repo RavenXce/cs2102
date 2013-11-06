@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105172138) do
+ActiveRecord::Schema.define(version: 20131106144132) do
 
   create_table "airports", force: true do |t|
     t.string   "iata_code"
@@ -71,11 +71,14 @@ ActiveRecord::Schema.define(version: 20131105172138) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email"
-    t.string   "password"
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",               default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.datetime "remember_created_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

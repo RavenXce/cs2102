@@ -1,4 +1,5 @@
 Cs2102::Application.routes.draw do
+  devise_for :users
   root to: 'welcome#index', as: :default
   post 'flights' => 'flights#search', as: :search_flights
   resources :flights, :bookings

@@ -2,10 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('ready page:change', () ->
-  $('.datepicker').datepicker()
-  $('.datepicker').datepicker('setValue', Date.now())  
+  $('.datepicker').datepicker('setValue', Date.now()) 
   $('.chosen-select').chosen(
-    width: "178px"
+    width: "100%"
   )  
   $('.touchspin').TouchSpin(
     min: 1
@@ -21,11 +20,14 @@ $(document).on('ready page:change', () ->
   );
   
   $('#book-btn').on('click', () ->
-    $('<form action="bookings" method="GET">' + 
-    '<input type="hidden" name="destination" value="' + imgnum + '">' +
-    '<input type="hidden" name="origin" value="' + imgnum + '">' +
-    '<input type="hidden" name="is_two_way" value="' + imgnum + '">' +
-    '<input type="hidden" name="flight_ids" value="' + imgnum + '">' +
+    $this = $(this)
+    $form = $this.parents('table')
+    $('<form action="bookings" method="POST">' +
+    '<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '">' + 
+    '<input type="hidden" name="destination" value="' + $form.data('destination') + '">' +
+    '<input type="hidden" name="origin" value="' + $form.data('origin') + '">' +
+    '<input type="hidden" name="is_two_way" value="' + $form.data('two-way')+ '">' +
+    '<input type="hidden" name="flight_ids" value="' + $this.parents('tr').data('flight-ids') + '">' +
     #pax? passengers? users?
     '</form>').submit();
   );

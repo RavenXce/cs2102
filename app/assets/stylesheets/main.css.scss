@@ -6,6 +6,13 @@ $font-family-sans-serif: 'Raleway', sans-serif;
 body {
   padding-top: 70px;
 }
+.alert {
+  font-weight: 500;
+  color: red;
+}
+.notice {
+  color: #777777;
+}
 .row-padded {
   padding-top: 5px;
   padding-bottom: 5px;
