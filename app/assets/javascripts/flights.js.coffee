@@ -27,8 +27,9 @@ $(document).on('ready page:change', () ->
     '<input type="hidden" name="destination" value="' + $form.data('destination') + '">' +
     '<input type="hidden" name="origin" value="' + $form.data('origin') + '">' +
     '<input type="hidden" name="is_two_way" value="' + $form.data('two-way')+ '">' +
-    '<input type="hidden" name="flight_ids" value="' + $this.parents('tr').data('flight-ids') + '">' +
-    '<input type="hidden" name="pax" value="' + $form.data('pax') + '">'
+    '<input type="hidden" name="pax" value="' + $form.data('pax') + '">' +
+    '<input type="hidden" name="flight_ids" value="' + $this.parents('tr').data('flight-ids') + '">' +    
+    '<input type="hidden" name="price" value="' + $this.parents('tr').data('price') + '">' + #XXX: bad
     '</form>').submit();
   );
 )

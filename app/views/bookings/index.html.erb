@@ -1,2 +1,59 @@
-Index page
-<%=@bookings.inspect%>
+<div class="booking-results">
+	<blockquote>
+		<h2>Bookings</h2>
+	</blockquote>
+
+	<div class="container">
+		<div class="row">
+			<%if !@bookings.empty?%>
+				<% @bookings.each_with_index do |b, index| %>
+				<div class="booking-table">
+					<h3><strong>Booking Reference: <%= b.reference_id%></strong>
+					<button type="button" id="book-btn" class="pull-right btn btn-warning btn-sm">
+						Cancel Booking
+					</button></h3>
+					<p>
+						From: <%= b.origin_full%>
+					</p>
+					<p>
+						To: <%= b.destination_full%>
+					</p>
+					<p>
+						Price: <%= number_to_currency b.price, precision: 0%>
+					</p>
+					<h4>Flight details</h4>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Flight Number</th>
+								<th>Airline</th>
+								<th>Departure</th>
+								<th></th>
+								<th>Arrival</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<%@flights[index].each do |f|%>
+							<tr>
+								<td><%= f.flight_number%></td>
+								<td><%= f.airline%></td>
+								<td><%= f.departure_location_full%></td>
+								<td><%= f.departure_time.to_formatted_s(:short)%></td>
+								<td><%= f.arrival_location_full%></td>
+								<td><%= f.arrival_time.to_formatted_s(:short)%></td>
+							</tr>
+							<%end%>
+						</tbody>
+					</table>
+				</div>
+				<hr>
+				<%end%>
+			<%else%>
+			<p>
+				You have no bookings.
+			</p>
+			<%end%>
+		</div>
+	</div>
+</div>

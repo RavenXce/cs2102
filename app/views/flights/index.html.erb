@@ -83,7 +83,7 @@
 				</thead>
 				<tbody>
 					<% @results.each do |r| %>
-					<tr data-flight-ids="<%= r[:flight_ids]%>">
+					<tr data-flight-ids="<%= r[:flight_ids]%>" data-price="<%= r[:total_price]%>">
 						<td<%= ' rowspan=2' if @two_way %>>
 							<%= number_to_currency r[:total_price], precision: 0%></td>
 							<td<%= ' rowspan=2' if @two_way %> class="airline-col">
