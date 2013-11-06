@@ -4,6 +4,7 @@ class FlightsController < ApplicationController
 
   def search
     @results = []
+    @pax = params[:pax]
     @two_way = params[:two_way]
     @two_way = @two_way == "true"
     @origin = params[:from_airport]
@@ -15,7 +16,7 @@ class FlightsController < ApplicationController
       flights_there.each do |ft|
         result = Hash.new
         result[:away] = ft
-        result[:total_price] = ft.price * params[:pax].to_f
+        result[:total_price] = ft.price * @pax.to_f
         result[:airlines] = ft.airline        
         result[:flight_ids] = ft.id
         @results << result
@@ -28,7 +29,7 @@ class FlightsController < ApplicationController
           result = Hash.new
           result[:away] = ft
           result[:back] = fb
-          result[:total_price] = (ft.price + fb.price) * params[:pax].to_f
+          result[:total_price] = (ft.price + fb.price) * @pax.to_f
           result[:airlines] = ft.airline == fb.airline ?  ft.airline : ft.airline + "/" + fb.airline
           result[:flight_ids] = ([] << ft.id << fb.id).join(',')
           @results << result

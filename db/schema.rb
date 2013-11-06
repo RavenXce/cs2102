@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106144132) do
+ActiveRecord::Schema.define(version: 20131106162335) do
 
   create_table "airports", force: true do |t|
     t.string   "iata_code"
@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(version: 20131106144132) do
     t.boolean  "is_two_way"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "flights", force: true do |t|
     t.string   "flight_number"

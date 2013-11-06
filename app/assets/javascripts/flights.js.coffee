@@ -28,7 +28,7 @@ $(document).on('ready page:change', () ->
     '<input type="hidden" name="origin" value="' + $form.data('origin') + '">' +
     '<input type="hidden" name="is_two_way" value="' + $form.data('two-way')+ '">' +
     '<input type="hidden" name="flight_ids" value="' + $this.parents('tr').data('flight-ids') + '">' +
-    #pax? passengers? users?
+    '<input type="hidden" name="pax" value="' + $form.data('pax') + '">'
     '</form>').submit();
   );
 )
