@@ -1,5 +1,14 @@
 class BookingsController < ApplicationController
   before_filter :authenticate_user!
+  
+  def index
+    @bookings = current_user.bookings
+    @flights = []
+    @bookings.each do |b|
+      @flights << b.flights.distinct.to_a
+    end
+  end
+  
   def create
     flight_ids = params[:flight_ids].split(',')
     Booking.transaction do          
@@ -18,11 +27,9 @@ class BookingsController < ApplicationController
     redirect_to bookings_path
   end
   
-  def index
-    @bookings = current_user.bookings
-    @flights = []
-    @bookings.each do |b|
-      @flights << b.flights.to_a
-    end
+  def destroy
+    Booking.destroy(params[:id])
+    flash.notice = "Booking cancelled."
+    redirect_to bookings_path
   end
 end

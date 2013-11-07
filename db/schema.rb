@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106201637) do
+ActiveRecord::Schema.define(version: 20131107065052) do
 
   create_table "airports", force: true do |t|
     t.string   "iata_code"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20131106201637) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.decimal  "price",        precision: 6, scale: 2
+    t.decimal  "price",        precision: 10, scale: 2
   end
 
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20131106201637) do
     t.string   "arrival_terminal"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",              precision: 6, scale: 2
+    t.decimal  "price",              precision: 10, scale: 2
     t.integer  "capacity"
   end
 

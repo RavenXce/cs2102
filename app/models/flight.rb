@@ -11,27 +11,36 @@ class Flight < ActiveRecord::Base
     airport.full_string
   end
   
+  def seats_left
+    self.capacity - Ticket.where(flight_id: self.id).count
+  end
+  
   def self.get_direct_flights date, origin, destination = nil
+    start_time = destination.nil? ? date.to_date : date # exact start_time if checking for adjoining
+    end_time = date.to_date + 1.day
     flights = Flight.where(:departure_location => origin)
                     .where('departure_time >= :start and departure_time <= :end',
-                      :start => date.to_date, :end => date.to_date + 1.day)
-    #flights = flights.where(:arrival_location => destination) if !destination.nil?
+                      :start => start_time, :end => end_time)
+    if !destination.nil?
+      flights = flights.where(:arrival_location => destination)
+    end
+    flights
   end
   
   def self.get_flights date, origin, destination
-    ajoining_flights = []
+    adjoining_flights = []
     first_flight = Flight.get_direct_flights date, origin
     first_flight.each do |ff|
       if ff.arrival_location == destination then
-        ajoining_flights << (Trip.new ff)        
+        adjoining_flights << (Trip.new ff)
         next
       end
-      second_flight = Flight.get_direct_flights date, ff.arrival_location, destination
+      second_flight = Flight.get_direct_flights ff.arrival_time, ff.arrival_location, destination
       second_flight.each do |sf|
-        ajoining_flights << (Trip.new ff, sf) #ajoining flights
+        adjoining_flights << (Trip.new ff, sf) #adjoining flights
       end
     end
-    ajoining_flights
+    adjoining_flights
   end
   
 end

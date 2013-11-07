@@ -9,16 +9,19 @@
 				<% @bookings.each_with_index do |b, index| %>
 				<div class="booking-table">
 					<h3><strong>Booking Reference: <%= b.reference_id%></strong>
-					<button type="button" id="book-btn" class="pull-right btn btn-warning btn-sm">
-						Cancel Booking
-					</button></h3>
+						<%= link_to (raw '<button type="button" class="pull-right cancel-btn btn btn-warning btn-sm">Cancel Booking</button></h3>'),
+						 'bookings/'+b.id.to_s, :method => :delete %>
 					<p>
 						From: <%= b.origin_full%>
 					</p>
 					<p>
 						To: <%= b.destination_full%>
 					</p>
+					<% if b.pax > 1%>
 					<p>
+						Pax: <%= b.pax %>
+					<p>
+					<%end%>
 						Price: <%= number_to_currency b.price, precision: 0%>
 					</p>
 					<h4>Flight details</h4>

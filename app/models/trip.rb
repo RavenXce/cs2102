@@ -1,5 +1,5 @@
 class Trip
-  #This class combines ajoining flights as a "Trip".  
+  #This class combines adjoining flights as a "Trip".  
   def initialize first, second = nil
     @flights = []
     @flights << first
@@ -24,6 +24,10 @@ class Trip
     price
   end
   
+  def seats_left
+    @flights.min_by(&:seats_left).seats_left
+  end
+  
   def arrival_time
     @flights.last.arrival_time
   end
@@ -40,7 +44,7 @@ class Trip
     @flights.first.departure_location
   end
   
-  def ajoining?
+  def adjoining?
     @flights.length > 1
   end
   

@@ -19,7 +19,7 @@ $(document).on('ready page:change', () ->
     updateTwoWayStatus()
   );
   
-  $('#book-btn').on('click', () ->
+  $('.book-btn').on('click', () ->
     $this = $(this)
     $form = $this.parents('table')
     $('<form action="bookings" method="POST">' +

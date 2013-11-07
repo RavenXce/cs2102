@@ -92,9 +92,9 @@
 								<td><%= r[:away].arrival_location%></td>
 								<td><%= r[:away].arrival_time.to_formatted_s(:short)%></td>
 								<td<%= ' rowspan=2' if @two_way %> class="center">
-									<button type="button" id="book-btn" class="btn btn-success<%= ' btn-xs' if !@two_way %>">
+									<button type="button" class="book-btn btn btn-success<%= ' btn-xs' if !@two_way %>">
 										Book Now!
-									</button></td>
+									</button> &nbsp; Only <%=r[:seats_left]%> seats left!</td>
 					</tr>
 					<%if @two_way then%>
 					<tr>
