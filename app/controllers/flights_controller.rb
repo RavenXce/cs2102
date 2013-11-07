@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
     @two_way = @two_way == "true"
     @origin = params[:from_airport]
     @destination = params[:to_airport]
-    flights_there = Flight.get_flights params[:to_date], @origin, @destination
+    flights_there = Flight.get_flights params[:from_date], @origin, @destination
     if !@two_way
       flights_there.each do |ft|
         result = Hash.new
@@ -20,7 +20,7 @@ class FlightsController < ApplicationController
         @results << result
       end
     else
-      flights_back = Flight.get_flights params[:to_date], @origin, @destination
+      flights_back = Flight.get_flights params[:to_date], @destination, @origin
       flights_there.each do |ft|
         flights_back.each do |fb|
           result = Hash.new
