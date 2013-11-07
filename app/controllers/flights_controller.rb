@@ -9,9 +9,7 @@ class FlightsController < ApplicationController
     @two_way = @two_way == "true"
     @origin = params[:from_airport]
     @destination = params[:to_airport]
-    #TODO: ajoining flights!!
-    flights_there = Flight.where(:departure_location => @origin, :arrival_location => @destination)
-    flights_there = flights_there.where('departure_time >= :start and departure_time <= :end', :start => params[:from_date].to_date, :end => params[:from_date].to_date + 1.day)
+    flights_there = Flight.get_flights params[:to_date], @origin, @destination
     if !@two_way
       flights_there.each do |ft|
         result = Hash.new
@@ -22,8 +20,7 @@ class FlightsController < ApplicationController
         @results << result
       end
     else
-      flights_back = Flight.where(:departure_location => @destination, :arrival_location => @origin)
-      flights_back = flights_back.where('departure_time >= :start and departure_time <= :end', :start => params[:to_date].to_date, :end => params[:to_date].to_date + 1.day)
+      flights_back = Flight.get_flights params[:to_date], @origin, @destination
       flights_there.each do |ft|
         flights_back.each do |fb|
           result = Hash.new
