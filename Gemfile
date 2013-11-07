@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-group :development, :test do
-  gem 'activerecord-import'
-end
+gem 'activerecord-import'
+
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'

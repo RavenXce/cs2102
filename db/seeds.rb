@@ -36,7 +36,7 @@ airports.each_pair do |iata_code, airport|
   parsed[:iata_code] = iata_code
   batch << Airport.new(parsed)
 end
-Airport.import batch
+#Airport.import batch
 
 100.times do
   batch = []
@@ -59,7 +59,6 @@ Airport.import batch
     flight[:arrival_terminal] = rand_int(1,4)    
     flight[:price] = rand_price(98,5000)
     flight[:capacity] = rand_int(50,525)
-    puts flight
     batch << Flight.new(flight)
   end
   Flight.import batch
