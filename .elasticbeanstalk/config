@@ -1,0 +1,12 @@
+[global]
+ApplicationName=ThinkCan-cs2102
+DevToolsEndpoint=git.elasticbeanstalk.ap-southeast-1.amazonaws.com
+EnvironmentName=ThinkCan-cs2102-env
+EnvironmentType=SingleInstance
+InstanceProfileName=aws-elasticbeanstalk-ec2-role
+OptionSettingFile=C:\Users\RavenXce\Documents\GitHub\cs2102\.elasticbeanstalk\optionsettings.ThinkCan-cs2102-env
+RdsEnabled=No
+Region=ap-southeast-1
+ServiceEndpoint=https://elasticbeanstalk.ap-southeast-1.amazonaws.com
+SolutionStack=64bit Amazon Linux running Ruby 1.9.3
+
