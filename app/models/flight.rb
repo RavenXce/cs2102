@@ -20,7 +20,7 @@ class Flight < ActiveRecord::Base
   
   def self.ajoining_flights date, origin, destination
     first_flight = Flight.get_flights date, origin
-    # loop and find 2nd flight and put into arrayd
+    # loop and find 2nd flight and put into array
   end
   
 end
