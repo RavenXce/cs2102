@@ -1,4 +1,5 @@
 class Flight < ActiveRecord::Base
+  has_many :tickets, dependent: :destroy
   has_many :bookings, through: :tickets
   
   def arrival_location_full
@@ -16,7 +17,7 @@ class Flight < ActiveRecord::Base
   end
   
   def self.get_direct_flights date, origin, destination = nil
-    start_time = destination.nil? ? date.to_date : date # exact start_time if checking for adjoining
+    start_time = destination.nil? || date.to_date == Date.today ? date.to_date : date # exact start_time if checking for adjoining or today
     end_time = date.to_date + 1.day
     flights = Flight.where(:departure_location => origin)
                     .where('departure_time >= :start and departure_time <= :end',

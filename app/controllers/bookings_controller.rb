@@ -11,6 +11,16 @@ class BookingsController < ApplicationController
   
   def create
     flight_ids = params[:flight_ids].split(',')
+    
+    # check seats left
+    flight_ids.each do |f|
+      if Flight.find(f.to_i).seats_left < params[:pax].to_i then
+        flash.alert = "Sorry, there are not enough seats left for this flight!"
+        redirect_to bookings_path
+        return
+      end
+    end
+    
     Booking.transaction do          
       begin # Generate new random booking reference      
         @new_reference = rand(10000000..99999999)

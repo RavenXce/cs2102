@@ -9,7 +9,16 @@ class FlightsController < ApplicationController
     @two_way = @two_way == "true"
     @origin = params[:from_airport]
     @destination = params[:to_airport]
-    flights_there = Flight.get_flights params[:from_date], @origin, @destination
+    @from_date = params[:from_date].to_datetime < DateTime.now ? DateTime.now : params[:from_date]
+    @to_date = params[:to_date].to_datetime < DateTime.now ? DateTime.now : params[:to_date]
+    
+    if (@to_date < @from_date)
+      flash.alert = "Date range is invalid!"
+      render 'index'
+      return
+    end
+    
+    flights_there = Flight.get_flights @from_date, @origin, @destination
     if !@two_way
       flights_there.each do |ft|
         next if ft.seats_left == 0
@@ -22,7 +31,7 @@ class FlightsController < ApplicationController
         @results << result
       end
     else
-      flights_back = Flight.get_flights params[:to_date], @destination, @origin
+      flights_back = Flight.get_flights @to_date, @destination, @origin
       flights_there.each do |ft|
         next if ft.seats_left == 0
         flights_back.each do |fb|
@@ -40,4 +49,5 @@ class FlightsController < ApplicationController
     end
     render 'index'
   end
+  
 end

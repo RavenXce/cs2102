@@ -9,6 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require datepicker
+ *= require jquery-ui-1.10.3.full.min
+ *= require ui.jqgrid
+ *= require ace-jqgrid
  *= require_self
  *= require_tree .
  *= require chosen

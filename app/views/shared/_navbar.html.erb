@@ -53,6 +53,19 @@
 					<a href="<%=new_user_session_path%>">Log In</a>
 				</li>
 				<%end%>
+				<%if current_user.try(:admin?) %>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Panel <b class="caret"></b></a>					
+					<ul class="dropdown-menu">
+						<li>
+							<a href="<%=admin_flights_path%>">All Flights</a>
+						</li>
+						<li>
+							<a href="<%=admin_bookings_path%>">All User Bookings</a>
+						</li>
+					</ul>
+				</li>
+				<%end%>
 			</ul>
 		</div>
 	</div>

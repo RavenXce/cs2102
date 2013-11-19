@@ -1,0 +1,45 @@
+<div class="booking-results">
+	<blockquote>
+		<h2>All User Bookings</h2>
+	</blockquote>
+
+	<div class="container">
+		<div class="row">
+			<%if !@bookings.empty? then%>
+			<div class="bookings-table">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Origin</th>
+							<th>Destination</th>
+							<th>Price</th>
+							<th>Pax</th>
+							<th>Departure Time</th>
+							<th>Arrival Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @bookings.each_with_index do |b, index| %>
+						<tr>
+							<td><%= b.user.email%></td>
+							<td><%= b.origin_full%></td>
+							<td><%= b.destination_full%></td>
+							<td><%= number_to_currency b.price, precision: 0%></td>
+							<td><%= b.pax %></td>
+							<td><%= b.departure_time.to_formatted_s(:short)%></td>
+							<td><%= b.arrival_time.to_formatted_s(:short)%></td>
+						</tr>
+					</tbody>
+					<%end%>
+				</table>
+			</div>
+			<hr>
+			<%else%>
+			<p>
+				There are no bookings.
+			</p>
+			<%end%>
+		</div>
+	</div>
+</div>
