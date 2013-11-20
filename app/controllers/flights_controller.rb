@@ -37,7 +37,7 @@ class FlightsController < ApplicationController
       end
     
       format.html do
-        if(!params.has_key?(:pax) || !params.has_key?(:two_way) || !params.has_key?(:from_airport) || !params.has_key(:to_airport)) then
+        if(params[:pax].nil?) then
           render 'index' and return
         end
         
