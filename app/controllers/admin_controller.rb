@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_filter :authenticate_admin!
+  
   def bookings
     @bookings = Booking.all
   end
@@ -9,5 +11,4 @@ class AdminController < ApplicationController
       format.html {}
     end 
   end
-
 end

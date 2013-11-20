@@ -1,4 +1,5 @@
 class FlightsController < ApplicationController
+  before_filter :authenticate_admin!, only: :edit
   
   def index
     
