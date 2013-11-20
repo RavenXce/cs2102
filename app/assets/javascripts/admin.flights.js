@@ -1,7 +1,6 @@
 jQuery(function($) {
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
-
 	grid = jQuery(grid_selector).jqGrid({
 		url: 'flights.json',
 		datatype: "json",

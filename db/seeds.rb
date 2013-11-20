@@ -36,7 +36,7 @@ airports.each_pair do |iata_code, airport|
   parsed[:iata_code] = iata_code
   batch << Airport.new(parsed)
 end
-#Airport.import batch
+Airport.import batch
 
 100.times do
   batch = []
