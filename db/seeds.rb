@@ -36,7 +36,7 @@ airports.each_pair do |iata_code, airport|
   parsed[:iata_code] = iata_code
   batch << Airport.new(parsed)
 end
-Airport.import batch
+#Airport.import batch
 
 100.times do
   batch = []
@@ -47,7 +47,7 @@ Airport.import batch
       to = airports.get_rand_pair
     end while from[0] == to[0] # make sure we have unique locations
     flight = Hash.new
-    flight[:airline] = airline[1][:name]
+    flight[:airline] = airline[0]
     flight[:flight_number] = airline[0] + "%04d" % rand_int(0,9999).to_s
     flight[:departure_location] = from[0]
     flight[:arrival_location] = to[0]
