@@ -1,64 +1,43 @@
-var grid_data = 
-[ 
-	{id:"1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-	{id:"2",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-	{id:"3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-	{id:"4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-	{id:"5",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-	{id:"6",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-	{id:"7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-	{id:"8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-	{id:"9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-	{id:"10",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-	{id:"11",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-	{id:"12",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-	{id:"13",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-	{id:"14",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-	{id:"15",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-	{id:"16",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-	{id:"17",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-	{id:"18",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-	{id:"19",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-	{id:"20",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-	{id:"21",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-	{id:"22",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-	{id:"23",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
-];	
-
 jQuery(function($) {
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 
-	jQuery(grid_selector).jqGrid({
-		//direction: "rtl",
-		
-		data: grid_data,
-		datatype: "local",
+	grid = jQuery(grid_selector).jqGrid({
+		url: 'flights.json',
+		datatype: "json",
 		height: 250,
-		colNames:[' ', 'ID','Last Sales','Name', 'Stock', 'Ship via','Notes'],
+		colNames:[' ', 'Flight Number', 'Airline', 'Dep Loc', 'Arr Loc', 'Dep Gate', 'Arr Gate', 'Dep Term', 'Arr Term', 'Dep Time', 'Arr Time', 'Price' ,'Capacity'],
 		colModel:[
 			{name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
 				formatter:'actions', 
 				formatoptions:{ 
-					keys:true,
-					
+					keys:true,					
 					delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
+					onSuccess:displayMessage
+					//,onError:displayError
 					//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 				}
 			},
-			{name:'id',index:'id', width:60, sorttype:"int", editable: true},
-			{name:'sdate',index:'sdate',width:90, editable:true, sorttype:"date",unformat: pickDate},
-			{name:'name',index:'name', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
-			{name:'stock',index:'stock', width:70, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch},
-			{name:'ship',index:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
-			{name:'note',index:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}} 
+			{name:'flight_number',index:'flight_number', width:100, editable: true},
+			{name:'airline',index:'airline', width:60, editable: true},
+			{name:'departure_location',index:'departure_location', width:70,editable: false,addable:true,edittype:'select',editoptions: { value: AIRPORT_LIST }},
+			{name:'arrival_location',index:'arrival_location', width:70,editable: false,addable:true,edittype:'select',editoptions: { value: AIRPORT_LIST }},
+			{name:'departure_gate',index:'departure_gate', width:70, editable: true,editoptions:{size:"3",maxlength:"3"}},
+			{name:'arrival_gate',index:'arrival_gate', width:70, editable: true,editoptions:{size:"3",maxlength:"3"}},
+			{name:'departure_terminal',index:'departure_terminal', width:70, editable: true,editoptions:{size:"1",maxlength:"1"}},
+			{name:'arrival_terminal',index:'arrival_terminal', width:70, editable: true,editoptions:{size:"1",maxlength:"1"}},
+			{name:'departure_time',index:'departure_time', width:120, editable:true, unformat: pickDate},
+			{name:'arrival_time',index:'arrival_time',width:120, editable:true, unformat: pickDate},
+			{name:'price',index:'price', width:60, formatter: 'currency', align:'right', editable: true},
+			{name:'capacity',index:'capacity', width:70, align:'right', editable: true},
 		], 
-
 		viewrecords : true,
 		rowNum:10,
 		rowList:[10,20,30],
 		pager : pager_selector,
 		altRows: true,
+		sortname: 'flight_number',
+		sortorder: 'asc',
 		//toppager: true,
 		
 		multiselect: true,
@@ -68,21 +47,30 @@ jQuery(function($) {
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
-				styleCheckbox(table);
-				
+				styleCheckbox(table);				
 				updateActionIcons(table);
 				updatePagerIcons(table);
 				enableTooltips(table);
 			}, 0);
 		},
-
-		editurl: "/dummy.html",//nothing is saved
-		caption: "jqGrid with inline editing",
-
-
+		editurl: 'flights/edit',
+		caption: "Flight Listing",
 		autowidth: true
-
 	});
+	
+	function displayProcessing() {
+		$('.notice').html('Processing request..');
+	}
+	
+	function displayMessage(response){
+		$('.notice').html(response.responseJSON.message);
+		var timeout;
+		clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            $('.notice').html('');
+        }, 5000);
+        return true;
+	}
 
 	//enable search/filter toolbar
 	//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
@@ -123,11 +111,11 @@ jQuery(function($) {
 		},
 		{
 			//edit record form
-			//closeAfterEdit: true,
+			closeAfterEdit: true,
 			recreateForm: true,
 			beforeShowForm : function(e) {
 				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
 				style_edit_form(form);
 			}
 		},
@@ -138,8 +126,24 @@ jQuery(function($) {
 			viewPagerButtons: false,
 			beforeShowForm : function(e) {
 				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
 				style_edit_form(form);
+			},
+			// Add fields which are addable but not editable. jQgrid doesn't know a property 'Addable'.
+			beforeInitData: function (formid) {
+			   colModelIterator(function(col) {
+			       if (col.addable) {
+			          grid.setColProp(col.name, { editable: true });
+			       }
+			   });
+			},
+			// Remove editable option.
+			onClose: function (response, postdata, formid) {				
+			   colModelIterator(function (col) {
+			       if (col.addable) {
+			          grid.setColProp(col.name, { editable: false });
+			        }
+			   });
 			}
 		},
 		{
@@ -149,7 +153,7 @@ jQuery(function($) {
 				var form = $(e[0]);
 				if(form.data('styled')) return false;
 				
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
 				style_delete_form(form);
 				
 				form.data('styled', true);
@@ -163,13 +167,12 @@ jQuery(function($) {
 			recreateForm: true,
 			afterShowSearch: function(e){
 				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />');
 				style_search_form(form);
 			},
 			afterRedraw: function(){
 				style_search_filters($(this));
-			}
-			,
+			},
 			multipleSearch: true,
 			/**
 			multipleGroup:true,
@@ -181,24 +184,26 @@ jQuery(function($) {
 			recreateForm: true,
 			beforeShowForm: function(e){
 				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />');
 			}
 		}
-	)
+	);
 
-
+	function colModelIterator(callback) {
+	    var colModel = grid.jqGrid('getGridParam', 'colModel');
+	    for (var index in colModel) { callback(colModel[index]); } 
+	}
 	
 	function style_edit_form(form) {
-		//enable datepicker on "sdate" field and switches for "stock" field
-		form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
-			.end().find('input[name=stock]')
-				  .addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
-
+		form.find('#departure_time, #arrival_time').datepicker({format:'yyyy-mm-dd' , autoclose:true});
+		form.find('#departure_location, #arrival_location').chosen({ width: "80%" });
+		
+		
 		//update buttons classes
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();//ui-icon, s-icon
 		buttons.eq(0).addClass('btn-primary').prepend('<i class="icon-ok"></i>');
-		buttons.eq(1).prepend('<i class="icon-remove"></i>')
+		buttons.eq(1).prepend('<i class="icon-remove"></i>');
 		
 		buttons = form.next().find('.navButton a');
 		buttons.find('.ui-icon').remove();
@@ -210,7 +215,7 @@ jQuery(function($) {
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();//ui-icon, s-icon
 		buttons.eq(0).addClass('btn-danger').prepend('<i class="icon-trash"></i>');
-		buttons.eq(1).prepend('<i class="icon-remove"></i>')
+		buttons.eq(1).prepend('<i class="icon-remove"></i>');
 	}
 	
 	function style_search_filters(form) {
@@ -221,7 +226,7 @@ jQuery(function($) {
 	}
 	function style_search_form(form) {
 		var dialog = form.closest('.ui-jqdialog');
-		var buttons = dialog.find('.EditTable')
+		var buttons = dialog.find('.EditTable');
 		buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'icon-retweet');
 		buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'icon-comment-alt');
 		buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'icon-search');
@@ -231,7 +236,7 @@ jQuery(function($) {
 		var form = $(e[0]);
 		if(form.data('styled')) return false;
 		
-		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
 		style_delete_form(form);
 		
 		form.data('styled', true);
@@ -239,7 +244,7 @@ jQuery(function($) {
 	
 	function beforeEditCallback(e) {
 		var form = $(e[0]);
-		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
 		style_edit_form(form);
 	}
 
@@ -295,7 +300,7 @@ jQuery(function($) {
 			var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 			
 			if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
-		})
+		});
 	}
 
 	function enableTooltips(table) {

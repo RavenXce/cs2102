@@ -44,4 +44,10 @@ class Flight < ActiveRecord::Base
     adjoining_flights
   end
   
+  def to_cell
+    ['', self.flight_number, self.airline, self.departure_location, self.arrival_location,
+     self.departure_gate, self.arrival_gate, self.departure_terminal, self.arrival_terminal,
+     self.departure_time.strftime("%F %H:%M"), self.arrival_time.strftime("%F %H:%M"), 
+     self.price, self.capacity]
+  end
 end

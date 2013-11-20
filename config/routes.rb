@@ -1,9 +1,9 @@
 Cs2102::Application.routes.draw do
   devise_for :users
   root to: 'welcome#index', as: :default
-  post 'flights' => 'flights#search', as: :search_flights
   get 'admin/bookings' => 'admin#bookings', as: :admin_bookings
   get 'admin/flights' => 'admin#flights', as: :admin_flights
+  post 'admin/flights/edit' => 'flights#edit'
   resources :flights, :bookings
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

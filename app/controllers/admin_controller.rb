@@ -4,6 +4,10 @@ class AdminController < ApplicationController
   end
   
   def flights
-    @flights = Flight.all
+    respond_to do |format|
+      format.json { redirect_to flights_url(params) and return }
+      format.html {}
+    end 
   end
+
 end

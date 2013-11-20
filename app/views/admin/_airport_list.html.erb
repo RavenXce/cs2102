@@ -1,0 +1,11 @@
+<%
+airportList = {}
+airportsPath = "#{Rails.root}/db/airports.json"
+airports = JSON.parse(File.read(airportsPath))
+airports.each_pair do |iata_code, airport|
+	airportList[iata_code] = airport["name"] + ' (' + iata_code + '), ' + airport["country"]
+end
+%>
+<script>
+	var AIRPORT_LIST = <%=raw airportList.to_json%>
+</script>
